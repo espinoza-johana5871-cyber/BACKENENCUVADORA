@@ -13,5 +13,17 @@
         "laravel-vite-plugin": "^3.0.0",
         "tailwindcss": "^4.0.0",
         "vite": "^8.0.0"
+<<<<<<< HEAD
+=======
+    },
+    "dependencies": {
+        "@types/react": "^19.2.17",
+        "@types/react-dom": "^19.2.3",
+        "@vitejs/plugin-react": "^6.0.3",
+        "react": "^19.2.7",
+        "react-dom": "^19.2.7",
+        "react-router-dom": "^7.18.0",
+        "typescript": "^6.0.3"
+>>>>>>> f19f637fe0187796c64592efa3a3edb8c3f27e5a
     }
 }
