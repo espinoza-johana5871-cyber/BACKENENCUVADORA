@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: incubadora-backend
+    env: php
+    buildCommand: composer install --no-dev && npm install && npm run build
+    startCommand: vendor/bin/heroku-php-apache2 public/
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: CACHE_STORE
+        value: file
