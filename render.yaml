@@ -12,7 +12,7 @@ services:
       - key: APP_KEY
         generateValue: true
       - key: APP_URL
-        value: https://backenencuvadora-2.onrender.com
+        value: https://backenencuvadora-2-9tl9.onrender.com
       - key: APP_NAME
         value: UniIncubadora
       - key: DB_CONNECTION
