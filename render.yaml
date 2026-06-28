@@ -29,7 +29,7 @@ services:
       - key: APP_KEY
         generateValue: true
       - key: APP_URL
-        sync: false
+        value: https://backenencuvadora-2.onrender.com
       # Database (PostgreSQL — Render lo inyecta automáticamente al linked DB)
       - key: DB_CONNECTION
         value: pgsql
@@ -60,14 +60,13 @@ services:
         value: database
       - key: CACHE_STORE
         value: database
-      # CORS & Sanctum — ACTUALIZAR con tu dominio real del frontend
-      # Ejemplo: https://tufrontend.onrender.com
+      # CORS & Sanctum
       - key: FRONTEND_URL
-        sync: false
+        value: https://fronteencuvadora.onrender.com
       - key: ALLOWED_ORIGINS
-        sync: false
+        value: https://fronteencuvadora.onrender.com
       - key: SANCTUM_STATEFUL_DOMAINS
-        sync: false
+        value: fronteencuvadora.onrender.com
       # Filesystem
       - key: FILESYSTEM_DISK
         value: local
