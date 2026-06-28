@@ -18,15 +18,15 @@ services:
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
-        sync: false
+        value: ep-blue-cherry-atpxkltu-pooler.c-9.us-east-1.aws.neon.tech
       - key: DB_PORT
         value: "5432"
       - key: DB_DATABASE
-        sync: false
+        value: neondb
       - key: DB_USERNAME
-        sync: false
+        value: neondb_owner
       - key: DB_PASSWORD
-        sync: false
+        value: npg_KLgGlT5j1WqN
       - key: FRONTEND_URL
         value: https://fronteencuvadora-qxys.vercel.app
       - key: ALLOWED_ORIGINS
