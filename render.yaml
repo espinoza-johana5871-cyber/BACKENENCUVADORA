@@ -1,9 +1,9 @@
 services:
   - type: web
     name: incubadora-backend
-    env: php
-    buildCommand: composer install --no-dev --optimize-autoloader
-    startCommand: php artisan migrate --force --seed && php artisan config:clear && vendor/bin/heroku-php-apache2 public/
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerContext: .
     envVars:
       - key: APP_ENV
         value: production
