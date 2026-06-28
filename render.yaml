@@ -1,15 +1,85 @@
 services:
+  # ─── Backend (Laravel) ────────────────────────────────────────
   - type: web
     name: incubadora-backend
     env: php
-    buildCommand: composer install --no-dev && npm install && npm run build
-    startCommand: vendor/bin/heroku-php-apache2 public/
+    buildCommand: >
+      composer install --no-dev
+      && npm install
+      && npm run build
+      && php artisan migrate --force
+      && php artisan config:cache
+      && php artisan route:cache
+    startCommand: >
+      mkdir -p /var/data
+      && rm -rf storage/app/public
+      && ln -sfn /var/data storage/app/public
+      && php artisan storage:link --force
+      && vendor/bin/heroku-php-apache2 public/
+    disk:
+      name: incubadora-storage
+      mountPath: /var/data
+      sizeGB: 1
     envVars:
+      # App
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        sync: false
+      # Database (PostgreSQL — Render lo inyecta automáticamente al linked DB)
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: incubadora-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: incubadora-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: incubadora-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: incubadora-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: incubadora-db
+          property: password
+      # Session / Cache / Queue
+      - key: SESSION_DRIVER
+        value: database
       - key: QUEUE_CONNECTION
-        value: sync
+        value: database
       - key: CACHE_STORE
-        value: file
+        value: database
+      # CORS & Sanctum — ACTUALIZAR con tu dominio real del frontend
+      # Ejemplo: https://tufrontend.onrender.com
+      - key: FRONTEND_URL
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: SANCTUM_STATEFUL_DOMAINS
+        sync: false
+      # Filesystem
+      - key: FILESYSTEM_DISK
+        value: local
+      # Logging
+      - key: LOG_CHANNEL
+        value: stack
+      - key: LOG_LEVEL
+        value: error
+
+  # ─── Base de datos PostgreSQL ──────────────────────────────────
+  - type: postgresql
+    name: incubadora-db
+    plan: free
+    databaseName: incubadora
+    ipAllowList: []
