@@ -1,22 +1,18 @@
 <?php
 
-$envOrigins    = array_map('trim', explode(',', env('ALLOWED_ORIGINS', '')));
-$frontendUrl   = env('FRONTEND_URL', '');
-$localOrigins  = ['http://localhost:5173', 'http://localhost:5174'];
-
-$allOrigins = array_values(array_unique(array_merge(
-    $envOrigins,
-    $frontendUrl ? [$frontendUrl] : [],
-    $localOrigins,
-)));
+$origins = array_values(array_filter(array_unique(array_merge(
+    array_map('trim', explode(',', env('ALLOWED_ORIGINS', ''))),
+    [env('FRONTEND_URL', '')],
+    ['http://localhost:5173', 'http://localhost:5174'],
+))));
 
 return [
-    'paths'                    => ['api/*', 'sanctum/csrf-cookie'],
+    'paths'                    => ['api/*'],
     'allowed_methods'          => ['*'],
-    'allowed_origins'          => $allOrigins,
+    'allowed_origins'          => $origins,
     'allowed_origins_patterns' => [],
     'allowed_headers'          => ['*'],
     'exposed_headers'          => [],
     'max_age'                  => 0,
-    'supports_credentials'     => true,
+    'supports_credentials'     => false,
 ];
