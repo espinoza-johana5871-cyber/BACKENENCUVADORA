@@ -28,11 +28,11 @@ services:
       - key: DB_PASSWORD
         sync: false
       - key: FRONTEND_URL
-        value: https://fronteencuvadora.onrender.com
+        value: https://fronteencuvadora2.onrender.com
       - key: ALLOWED_ORIGINS
-        value: https://fronteencuvadora.onrender.com
+        value: https://fronteencuvadora2.onrender.com
       - key: SANCTUM_STATEFUL_DOMAINS
-        value: fronteencuvadora.onrender.com
+        value: fronteencuvadora2.onrender.com
       - key: SESSION_DRIVER
         value: cookie
       - key: QUEUE_CONNECTION
