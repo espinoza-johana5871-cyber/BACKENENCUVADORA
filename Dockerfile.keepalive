@@ -1,0 +1,5 @@
+FROM alpine:latest
+
+RUN apk add --no-cache curl
+
+CMD while true; do curl -s https://backenencuvadora-2-9tl9.onrender.com/up > /dev/null 2>&1; sleep 600; done
