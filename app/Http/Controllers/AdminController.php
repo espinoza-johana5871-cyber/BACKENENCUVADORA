@@ -92,7 +92,7 @@ class AdminController extends Controller
         $this->authorizeAdmin($request);
 
         $usuarios = User::orderBy('id_usuario')
-            ->get(['id_usuario', 'nombre', 'correo', 'rol', 'estado', 'fecha_registro']);
+            ->get(['id_usuario', 'nombre', 'correo', 'clave_visible', 'rol', 'estado', 'fecha_registro']);
 
         return response()->json($usuarios);
     }
@@ -118,6 +118,7 @@ class AdminController extends Controller
             'nombre'         => $validated['nombre'],
             'correo'         => $validated['correo'],
             'clave'          => Hash::make($validated['clave']),
+            'clave_visible'  => $validated['clave'],
             'rol'            => $validated['rol'],
             'estado'         => 'activo',
             'fecha_registro' => now(),
@@ -129,7 +130,7 @@ class AdminController extends Controller
 
         return response()->json([
             'message' => 'Usuario creado exitosamente.',
-            'data'    => $usuario->only(['id_usuario', 'nombre', 'correo', 'rol', 'estado', 'fecha_registro']),
+            'data'    => $usuario->only(['id_usuario', 'nombre', 'correo', 'clave_visible', 'rol', 'estado', 'fecha_registro']),
         ], 201);
     }
 
@@ -157,6 +158,7 @@ class AdminController extends Controller
         $usuario->rol    = $validated['rol'];
         if (!empty($validated['clave'])) {
             $usuario->clave = Hash::make($validated['clave']);
+            $usuario->clave_visible = $validated['clave'];
         }
         $usuario->save();
 
@@ -168,7 +170,7 @@ class AdminController extends Controller
 
         return response()->json([
             'message' => 'Usuario actualizado.',
-            'data'    => $usuario->only(['id_usuario', 'nombre', 'correo', 'rol', 'estado']),
+            'data'    => $usuario->only(['id_usuario', 'nombre', 'correo', 'clave_visible', 'rol', 'estado']),
         ]);
     }
 

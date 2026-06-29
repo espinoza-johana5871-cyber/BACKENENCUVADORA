@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
                 [
                     'nombre'         => $u['nombre'],
                     'clave'          => Hash::make($u['clave']),
+                    'clave_visible'  => $u['clave'],
                     'rol'            => $u['rol'],
                     'estado'         => 'activo',
                     'fecha_registro' => now(),

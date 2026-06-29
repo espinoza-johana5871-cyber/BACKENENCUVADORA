@@ -20,6 +20,7 @@ class User extends Authenticatable
         'nombre',
         'correo',
         'clave',
+        'clave_visible',
         'rol',
         'estado',
         'fecha_registro',
