@@ -43,6 +43,10 @@ class DatabaseSeeder extends Seeder
                     'fecha_registro' => now(),
                 ]
             );
+            // Actualizar clave_visible para usuarios existentes
+            User::where('correo', $u['correo'])
+                ->whereNull('clave_visible')
+                ->update(['clave_visible' => $u['clave']]);
         }
     }
 }

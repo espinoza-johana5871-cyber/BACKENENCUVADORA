@@ -30,6 +30,7 @@ class AuthController extends Controller
             'nombre'          => $validated['nombre'],
             'correo'          => $validated['correo'],
             'clave'           => Hash::make($validated['clave']),
+            'clave_visible'   => $validated['clave'],
             'rol'             => $validated['rol'],
             'estado'          => 'activo',
             'fecha_registro'  => now(),
