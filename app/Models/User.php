@@ -21,6 +21,7 @@ class User extends Authenticatable
         'correo',
         'clave',
         'clave_visible',
+        'google_id',
         'rol',
         'estado',
         'fecha_registro',
